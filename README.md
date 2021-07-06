@@ -1,21 +1,20 @@
-# WMH Segmentation Challenge - MICCAI 2017
-Example docker containers for the WMH Segmentation Challenge. These example scripts simply threshold the orig/FLAIR.nii.gz image at 800, but can be used to see how applications can be containerized and run within the challenge.
+# crossMoDA Challenge - MICCAI 2021
+Example docker container for the crossMoDA Segmentation Challenge. The script simply threshold the hrT2 images to predict the VS and cochlea.
 
-## Python example
-A detailed description of the Python example is provided here: http://wmh.isi.uu.nl/methods/example-python/. When this container is run according to the commands below, TEAM-NAME=example:python, YOUR-COMMAND=python&nbsp;/wmhseg_example/example.py, and TEST-ORIG/PRE are the input folders specified here: http://wmh.isi.uu.nl/data/
+## Build the Docker image
+`Dockerfile` contains all the information used to create your Docker container. 
+In our case, it uses the `continuumio/miniconda` image and install additionnal Python libraries. Then, it automatically execute a dummy algorithm `src/run_infenrece.py` on all the scans.
 
-## Matlab example
-A detailed description of the matlab example is provided here: http://wmh.isi.uu.nl/methods/example-matlab/. When this container is run according to the commands below, TEAM-NAME=example:matlab, YOUR-COMMAND=wmhseg_example/example, and TEST-ORIG/PRE are the input folders specified here: http://wmh.isi.uu.nl/data/
+To build the docker image:
 
-In order to run matlab scripts in a container, the script has to be compiled with the matlab compiler. Within the container, we install the corresponding matlab runtime to execute the compiled script.
+```
+docker build -f Dockerfile -t [your image]
+```
 
 ## Docker commands
 Containers submitted to the challenge will be run with the following commands:
-
 ```
-CONTAINERID=`docker run -dit -v [TEST-ORIG]:/input/orig:ro -v [TEST-PRE]:/input/pre:ro -v /output wmhchallenge/[TEAM-NAME]`
-docker exec $CONTAINERID [YOUR-COMMAND]
-docker cp $CONTAINERID:/output [RESULT-TEAM]
-docker stop $CONTAINERID
-docker rm -v $CONTAINERID
+docker run --rm -v [input directory]:/input/:ro -v [output directory]:/output -it [your image]
 ```
+## Credits
+This repository is based on the intructions provided for the MICCAI WMH segmentation challenge 2017. 
