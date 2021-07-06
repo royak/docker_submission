@@ -3,7 +3,7 @@ Example docker container for the crossMoDA Challenge organized as part of MICCAI
 
 ## Build the Docker image
 `Dockerfile` contains all the information used to create the Docker container. 
-Speficically, it uses the `continuumio/miniconda` image and install additionnal Python libraries. Then, it automatically execute a dummy algorithm `src/run_inference.py` on all the scans located in `/input/` and write the results in `/output/`.
+Speficically, it uses the `continuumio/miniconda` image and installs additionnal Python libraries. Then, it automatically executes a dummy algorithm `src/run_inference.py` on all the scans located in `/input/` and write the results in `/output/`.
 
 To build the docker image:
 
