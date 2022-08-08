@@ -4,10 +4,10 @@ import SimpleITK as sitk
 import os
 
 input_dir = '/input/'
-path_img = os.path.join(input_dir,'crossmoda_{}_hrT2.nii.gz')
-path_pred = '/output/crossmoda_{}_Label.nii.gz'
+path_img = os.path.join(input_dir,'{}_hrT2.nii.gz')
+path_pred = '/output/{}_Label.nii.gz'
 
-list_case = [k.split('_')[1] for k in os.listdir(input_dir)]
+list_case = [k.split('_hrT2')[0] for k in os.listdir(input_dir)]
 
 for case in list_case:
     t2_img = sitk.ReadImage(path_img.format(case))
